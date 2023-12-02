@@ -133,3 +133,94 @@ button {
   height: auto; 
   
 }
+
+.pershkrimet-container{
+  max-width: 80%;
+  margin-right: auto;
+  margin-left: auto;
+  background-color: white;
+}
+
+.row{
+  display: flex;
+}
+
+.pershkrimi{
+  flex-grow: 1;
+  max-width: 100%;
+  font-size: 35px;
+  justify-content: center;
+}
+
+
+.paragrafi{
+  font-size: 20px;
+}
+
+.a{
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.a img{
+  width: 30%;
+  display: inline;
+  padding: 10px 40px;
+}
+
+.a{
+  font-size: 15px;
+}
+
+.butonii{
+  background-color: rgb(102, 197, 102);
+  padding: 5px 10px;
+  border-radius: 5px;
+  display: inline-block;
+   text-decoration: none;
+  /*padding: 10px;*//*per me zgjeru buttonin*/
+  margin-top: 5%;
+}
+
+/*divi i dyte*/
+.row1{
+  display: flex;
+}
+
+.pershkrimi1{
+  max-width: 100%;
+  font-size: 35px;
+  justify-content: center;
+  max-height: 500px;
+}
+
+.paragrafi1{
+  font-size: 20px;
+}
+
+.a1{
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.a1 img{
+  width: 30%;
+  display: inline;
+  padding: 10px 40px;
+}
+
+.a1{
+  font-size: 15px;
+}
+
+.butoni1{
+  background-color: rgb(102, 197, 102);
+  padding: 5px 10px;
+  border-radius: 5px;
+  display: inline-block;
+  text-decoration: none;
+  /*padding: 20px;*/ /*per me zgjanu butonin*/
+  margin-top: 5%;
+}
