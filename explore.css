@@ -2,42 +2,175 @@ body {
     margin: 0;
     font-family: 'Verdana', sans-serif; 
     background-color: #f4f4f4;
-  }
+ }
   
-  .headerContainer {
+.headerContainer {
     display: flex;
     justify-content: center; 
     align-items: center;
     background-color: white;
     padding: 20px;
-  }
+}
   
-  .logoand img {
+.logoand img {
     max-height: 120px;
     border-radius: 5%;
     margin-right: 20px;
-  }
+}
   
-  .paragrafet {
+.paragrafet {
     display: flex;
     align-items: center;
-  }
+}
   
-  .paragrafet a {
+.paragrafet a {
     text-decoration: none;
     color: black;
     margin: 0 20px; 
     padding: 10px;
     font-weight: bold; 
     font-family: 'Arial', sans-serif; 
-  }
+}
   
-  .paragrafet a:hover {
+.paragrafet a:hover {
     text-decoration: underline;
     color: #ffcc00;
-  }
+}
   
-  .social img {
+.social img {
     max-height: 20px;
     margin-left: 20px; 
-  } 
+} 
+
+body, html {
+    margin: 0;
+    padding: 0;
+}
+  
+  
+.container {
+    position: relative;
+    text-align: center;
+}
+  
+  
+.container img {
+    width: 100%; 
+    height: auto;
+}
+  
+.text-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    text-align: center;
+}
+  
+.text-overlay h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+  
+.text-overlay p {
+    font-size: 1.2em; 
+}
+
+.container img {
+    width: 100%; 
+    height: 500px;
+}
+
+.pershkrimet-container{
+    max-width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+    background-color: white;
+}
+  
+.row{
+    display: flex;
+}
+  
+.pershkrimi{
+    flex-grow: 1;
+    max-width: 100%;
+    font-size: 35px;
+    justify-content: center;
+}
+  
+  
+.paragrafi{
+    font-size: 20px;
+    font-family: 'Arial', sans-serif;
+    
+}
+  
+.a{
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+  
+.a img{
+    width: 30%;
+    display: inline;
+    padding: 10px 40px;
+}
+  
+.a{
+    font-size: 15px;
+}
+  
+.butonii{
+    background-color: rgb(102, 197, 102);
+    padding: 5px 10px;
+    border-radius: 5px;
+    display: inline-block;
+    text-decoration: none;
+    padding: 10px;
+    margin-top: 5%;
+}
+  
+.row1{
+    display: flex;
+}
+  
+.pershkrimi1{
+    max-width: 100%;
+    font-size: 35px;
+    justify-content: center;
+    margin-left: 50px;
+}
+  
+.paragrafi1{
+    font-size: 20px;
+    font-family: 'Arial', sans-serif;
+}
+  
+.a1{
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+  
+.a1 img{
+    width: 30%;
+    display: inline;
+    padding: 10px 40px;
+}
+  
+.a1{
+    font-size: 15px;
+}
+  
+.butoni1{
+    background-color: rgb(102, 197, 102);
+    padding: 5px 10px;
+    border-radius: 5px;
+    display: inline-block;
+    text-decoration: none;
+    padding: 10px;
+    margin-top: 5%;
+}
