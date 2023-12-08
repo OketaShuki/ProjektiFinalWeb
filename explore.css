@@ -1,0 +1,43 @@
+body {
+    margin: 0;
+    font-family: 'Verdana', sans-serif; 
+    background-color: #f4f4f4;
+  }
+  
+  .headerContainer {
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    background-color: white;
+    padding: 20px;
+  }
+  
+  .logoand img {
+    max-height: 120px;
+    border-radius: 5%;
+    margin-right: 20px;
+  }
+  
+  .paragrafet {
+    display: flex;
+    align-items: center;
+  }
+  
+  .paragrafet a {
+    text-decoration: none;
+    color: black;
+    margin: 0 20px; 
+    padding: 10px;
+    font-weight: bold; 
+    font-family: 'Arial', sans-serif; 
+  }
+  
+  .paragrafet a:hover {
+    text-decoration: underline;
+    color: #ffcc00;
+  }
+  
+  .social img {
+    max-height: 20px;
+    margin-left: 20px; 
+  } 
