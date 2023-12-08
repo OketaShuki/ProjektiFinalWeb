@@ -34,30 +34,29 @@
                 </h2>
                 <br>
                 <p>
-                 Kontaktoni nje nga agjentet tane per informacione me te detajshme:
+                    Kontaktoni nje nga agjentet tane per informacione me te detajshme:
                 </p>
             </div>
-            <form id="myForm" class="contactus">
+            <form id="myForm" class="contactus" onsubmit="return validateForm()">
                 <p class="contactp">Na Kontaktoni</p>
                 <br>
                 <div class="login">
-                  <input type="text" placeholder="Emri" class="input">
-                  <input type="text" placeholder="Email" class="input">
+                    <input type="text" placeholder="Emri" class="input" id="emri">
+                    <input type="email" placeholder="Email" class="input" id="email">
                 </div>
-                
+        
                 <div class="subject">
-                  <input type="text" placeholder="Titulli" class="input">
+                    <input type="text" placeholder="Titulli" class="input" id="titulli">
                 </div>
-                
+        
                 <div class="msg">
-                  <textarea  class="area" placeholder="Mesazhi"></textarea>
+                    <textarea class="area" placeholder="Mesazhi" id="mesazhi"></textarea>
                 </div>
-                
+        
                 <div>
-                    <button class="btn" onclick="myFunction()">Dergo Mesazhin</button>
+                    <button type="submit" class="btn">Dergo Mesazhin</button>
                 </div>
             </form>
-
         </main>
         <footer>
             <div class="footer-div">
