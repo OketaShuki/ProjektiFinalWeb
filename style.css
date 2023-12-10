@@ -342,6 +342,6 @@
 }
 
 footer{
-  box-shadow: 0 0 50px rgba(0, 0, 0, 0.5); /*rgb(17, 108, 115);*/ /*ju bahet kalter anash qajo qe e ka si hiri*/
+  box-shadow: 0 0 50px rgba(0, 0, 0, 0.5); 
   margin-top: 50px;
 }
