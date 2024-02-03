@@ -1,11 +1,11 @@
-<?php 
-include_once 'DatabaseConenction.php';
-include_once 'user.php';
+<?php
 
-class UserRepository{
+include_once 'DatabaseConenction.php';
+
+class UserRepository {
     private $connection;
 
-    function __construct(){
+    public function __construct(){
         $conn = new DatabaseConenction;
         $this->connection = $conn->startConnection();
     }
@@ -23,92 +23,88 @@ class UserRepository{
     
         $statement = $conn->prepare($sql);
     
-        $statement->execute([$id, $name, $surname, $username, $password]);
+        try {
+            $statement->execute([$id, $name, $surname, $username, $password]);
+            return true; 
+        } catch (PDOException $e) {
+            return 'Error: ' . $e->getMessage(); 
+        }
+    }
     
-        echo "<script> alert('User has been inserted successfully!'); </script>";
+
+    public function getAllUsers(){
+        $conn = $this->connection;
+
+        
+        $sql = "SELECT id, name, surname, username, password, role FROM user";
+
+        $statement = $conn->query($sql);
+        $users = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        return $users;
     }
 
-
-    function getUserByUsername($username) {
+    function getUserById($id) {
         $conn = $this->connection;
-    
-        $sql = "SELECT * FROM user WHERE username=?";
-    
+
+        $sql = "SELECT id, name, surname, username FROM user WHERE id=?";
+
+        $statement = $conn->prepare($sql);
+        $statement->execute([$id]);
+        $user = $statement->fetch(PDO::FETCH_ASSOC);
+
+        return $user;
+    }
+
+    function updateUser($id, $name, $surname, $username, $password) {
         try {
+            $conn = $this->connection;
+
+            $sql = "UPDATE user SET name=?, surname=?, username=?, password=? WHERE id=?";
+
             $statement = $conn->prepare($sql);
-            $statement->execute([$username]);
-            $user = $statement->fetch(PDO::FETCH_ASSOC);
-    
-            if ($user && isset($user['id'], $user['name'], $user['surname'], $user['username'], $user['password'])) {
-                return new User($user['id'], $user['name'], $user['surname'], $user['username'], $user['password']);
-            } else {
-                return null;
+
+            if (!$statement) {
+                throw new Exception("Error preparing statement: " . $conn->errorInfo()[2]);
             }
+
+            $statement->execute([$name, $surname, $username, $password, $id]);
+
+            return "Update was successful";
         } catch (PDOException $e) {
-            // Log or handle the exception as needed
-            die("Error getting user by username: " . $e->getMessage());
+            return "Error updating user: " . $e->getMessage();
+        } catch (Exception $e) {
+            return $e->getMessage();
         }
     }
 
-    function getAllUsers(){
+    function deleteUser($id) {
+        try {
+            $conn = $this->connection;
+
+            $sql = "DELETE FROM user WHERE id=?";
+
+            $statement = $conn->prepare($sql);
+
+            $statement->execute([$id]);
+
+            return "Delete was successful";
+        } catch (PDOException $e) {
+            return "Error deleting user: " . $e->getMessage();
+        }
+    }
+    function getAllUsersByRole($role) {
         $conn = $this->connection;
     
-        // Make sure to select only the columns that exist in your 'user' table
-        $sql = "SELECT id, name, surname, username, password FROM user";
+        
+        $sql = "SELECT id, name, surname, username, password, role FROM user WHERE role = ?";
     
-        $statement = $conn->query($sql);
-        $users = $statement->fetchAll();
+        $statement = $conn->prepare($sql);
+        $statement->execute([$role]);
+        $users = $statement->fetchAll(PDO::FETCH_ASSOC);
     
         return $users;
     }
-    
-
-    function getUserById($id){
-    $conn = $this->connection;
-
-    $sql = "SELECT * FROM user WHERE id=?";
-
-    $statement = $conn->prepare($sql);
-    $statement->execute([$id]);
-    $user = $statement->fetch(PDO::FETCH_ASSOC);
-
-    return $user;
-    }
-
-
-    function updateUser($id, $name, $surname, $username, $password) {
-        $conn = $this->connection;
-    
-        $sql = "UPDATE user SET name=?, surname=?, username=?, password=? WHERE id=?";
-    
-        $statement = $conn->prepare($sql);
-    
-        if (!$statement) {
-            die(print_r($conn->errorInfo(), true));  // Display any errors
-        }
-    
-        $statement->execute([$name, $surname, $username, $password, $id]);
-    
-        echo "<script>alert('update was successful'); </script>";
-    }
-     
-
-    function deleteUser($id){
-        $conn = $this->connection;
-
-        $sql = "DELETE FROM user WHERE id=?";
-
-        $statement = $conn->prepare($sql);
-
-        $statement->execute([$id]);
-
-        echo "<script>alert('delete was successful'); </script>";
-   } 
 }
-
-
-//  $userRepo = new UserRepository;
-
-//  $userRepo->updateUser('1111','SSS','SSS','SSS','SSS','SSS');
 
 ?>

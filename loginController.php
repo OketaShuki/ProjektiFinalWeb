@@ -1,29 +1,63 @@
 <?php
-include_once 'userRepository.php';
 
-if (isset($_POST['loginBtn'])) {
-    if (empty($_POST['username']) || empty($_POST['password'])) {
-        echo '<span style="background-color: rgb(139, 78, 37);">Fill both username and password!</span>';
-    } else {
-        $username = $_POST['username'];
-        $password = $_POST['password'];
+include_once 'DatabaseConenction.php';
 
-        $userRepository = new UserRepository();
+class UserRepository {
+    private $db;
 
-        // Assuming getUserByUsername returns a User object or null
-        $user = $userRepository->getUserByUsername($username);
+    public function __construct($db) {
+        $this->db = $db;
+    }
 
-        if ($user !== null && password_verify($password, $user->getPassword())) {
-            // Successful login
-            session_start();
-            $_SESSION['user_id'] = $user->getId();
-            $_SESSION['username'] = $user->getUsername();
-            echo '<span style="background-color: green;">Login successful!</span>';
-            // You can redirect the user to a dashboard or another page here
-        } else {
-            // Failed login
-            echo '<span style="background-color: rgb(139, 78, 37);">Invalid username or password!</span>';
-        }
+    public function getUserByUsername($username) {
+        $stmt = $this->db->prepare("SELECT * FROM user WHERE username = :username");
+        $stmt->bindParam(':username', $username);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 }
+
+$dbConnection = new DatabaseConenction();
+$db = $dbConnection->startConnection();
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $username = isset($_POST["username"]) ? trim($_POST["username"]) : "";
+    $password = isset($_POST["password"]) ? trim($_POST["password"]) : "";
+
+    $errors = array(); 
+
+    if (empty($username)) {
+        $errors[] = "Username is required.";
+    }
+
+    if (empty($password)) {
+        $errors[] = "Password is required.";
+    }
+
+    if (!empty($errors)) {
+        header("Location: login.html?error=" . urlencode(implode("<br>", $errors)));
+        exit();
+    }
+
+    $userRepository = new UserRepository($db);
+    $user = $userRepository->getUserByUsername($username);
+
+    if ($user) {
+        $storedPassword = $user["password"] ?? "";
+    
+  
+        if (password_verify($password, $storedPassword)) {
+            echo "<script> alert('User has logged in successfully!'); </script>";
+            header("Location: home.html");
+            exit();
+        } else {
+            echo "Invalid password.";
+        }
+    } else {
+        echo "Invalid username.";
+    }
+    
+
+}
+
 ?>
